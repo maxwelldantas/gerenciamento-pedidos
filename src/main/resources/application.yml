@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: gerenciamento-pedidos
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:PG_DB001}
+    username: ${POSTGRES_USER:admin}
+    password: ${POSTGRES_PASSWORD:gepos}
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+springdoc:
+  open-api:
+    info:
+      title: Gerenciamento dos pedidos
+      version: v0.0.1-SNAPSHOT
