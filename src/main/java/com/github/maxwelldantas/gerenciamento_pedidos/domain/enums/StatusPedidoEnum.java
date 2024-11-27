@@ -1,5 +1,7 @@
 package com.github.maxwelldantas.gerenciamento_pedidos.domain.enums;
 
+import com.github.maxwelldantas.gerenciamento_pedidos.exception.BusinessException;
+
 public enum StatusPedidoEnum {
 	RECEBIDO(0),
 	PREPARADO(1),
@@ -19,6 +21,7 @@ public enum StatusPedidoEnum {
 				return status;
 			}
 		}
-		throw new RuntimeException("Código de status não existe!");
+
+		throw new BusinessException("Código de status não existe!");
 	}
 }

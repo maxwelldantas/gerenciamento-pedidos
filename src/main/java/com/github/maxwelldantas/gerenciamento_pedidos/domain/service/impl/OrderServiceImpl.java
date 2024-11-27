@@ -8,6 +8,7 @@ import com.github.maxwelldantas.gerenciamento_pedidos.domain.enums.StatusPedidoE
 import com.github.maxwelldantas.gerenciamento_pedidos.domain.model.Pedido;
 import com.github.maxwelldantas.gerenciamento_pedidos.domain.model.Produto;
 import com.github.maxwelldantas.gerenciamento_pedidos.domain.service.OrderService;
+import com.github.maxwelldantas.gerenciamento_pedidos.exception.BusinessException;
 import com.github.maxwelldantas.gerenciamento_pedidos.repository.PedidoRepository;
 import com.github.maxwelldantas.gerenciamento_pedidos.repository.ProdutoRepository;
 import jakarta.transaction.Transactional;
@@ -34,13 +35,13 @@ public class OrderServiceImpl implements OrderService {
 		Set<String> listaProdutosNomesUnicos = new HashSet<>();
 		for (ProdutoRequestDTO produtoRequestDTO : pedidoRequestDTO.produtos()) {
 			if (produtoRequestDTO.quantidade() <= 0) {
-				throw new RuntimeException("Produto não pode ter quantidade igual a 0 ou menor!");
+				throw new BusinessException("Produto não pode ter quantidade igual a 0 ou menor!");
 			}
 			listaProdutosNomesUnicos.add(produtoRequestDTO.nome());
 		}
 
 		if (pedidoRequestDTO.produtos().size() != listaProdutosNomesUnicos.size()) {
-			throw new RuntimeException("Existem produtos com nome duplicado no pedido!");
+			throw new BusinessException("Existem produtos com nome duplicado no pedido!");
 		}
 
 		List<Produto> produtos = new ArrayList<>();
